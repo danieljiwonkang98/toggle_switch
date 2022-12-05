@@ -365,53 +365,55 @@ class _ToggleSwitchState extends State<ToggleSwitch>
                 }
 
                 /// Returns switch item
-                return GestureDetector(
-                  onTap: () => _handleOnTap(index ~/ 2),
-                  child: AnimatedContainer(
-                    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                    constraints: BoxConstraints(
-                      maxWidth: widget.isVertical
-                          ? BoxConstraints().maxWidth
-                          : _calculateWidth(index ~/ 2, totalSwitches),
-                      maxHeight: widget.isVertical
-                          ? _calculateHeight(index ~/ 2, totalSwitches)
-                          : BoxConstraints().maxHeight,
-                    ),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: active ? activeBorder : null,
-                      borderRadius: widget.radiusStyle
-                          ? BorderRadius.all(
-                              Radius.circular(widget.cornerRadius))
-                          : cornerRadius,
-                      gradient: LinearGradient(
-                        colors: bgColor!.length == 1
-                            ? [bgColor[0], bgColor[0]]
-                            : bgColor,
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                return Flexible(
+                  child: GestureDetector(
+                    onTap: () => _handleOnTap(index ~/ 2),
+                    child: AnimatedContainer(
+                      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      constraints: BoxConstraints(
+                        maxWidth: widget.isVertical
+                            ? BoxConstraints().maxWidth
+                            : _calculateWidth(index ~/ 2, totalSwitches),
+                        maxHeight: widget.isVertical
+                            ? _calculateHeight(index ~/ 2, totalSwitches)
+                            : BoxConstraints().maxHeight,
                       ),
-                    ),
-                    duration: Duration(
-                        milliseconds:
-                            widget.animate ? widget.animationDuration : 0),
-                    curve: widget.curve,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        icon,
-                        Flexible(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: (icon is Container) ? 0.0 : 5.0),
-                            child: Text(
-                              widget.labels?[index ~/ 2] ?? '',
-                              style: textStyle,
-                              overflow: TextOverflow.ellipsis,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        border: active ? activeBorder : null,
+                        borderRadius: widget.radiusStyle
+                            ? BorderRadius.all(
+                                Radius.circular(widget.cornerRadius))
+                            : cornerRadius,
+                        gradient: LinearGradient(
+                          colors: bgColor!.length == 1
+                              ? [bgColor[0], bgColor[0]]
+                              : bgColor,
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      duration: Duration(
+                          milliseconds:
+                              widget.animate ? widget.animationDuration : 0),
+                      curve: widget.curve,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          icon,
+                          Flexible(
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: (icon is Container) ? 0.0 : 5.0),
+                              child: Text(
+                                widget.labels?[index ~/ 2] ?? '',
+                                style: textStyle,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
